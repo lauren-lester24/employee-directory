@@ -1,8 +1,9 @@
 import express from "express";
-const app = express(); // create the express app
-export default app;
-
 import employees from "#db/employees";
+
+const app = express(); // create the express app
+
+
 
 //const express = require("express"); // import the express framework
 
@@ -12,7 +13,7 @@ app.get("/", (request, response) => {
 });
 
 app.get("/employees", (request, response) => {
-  response.send(employees);
+  response.json(employees);
 });
 
 app.get("/employees/:id", (request, response) => {
@@ -27,3 +28,12 @@ app.get("/employees/:id", (request, response) => {
   }
   response.json(foundEmployee);
 });
+
+
+app.get("/employees/random", (request, response) => {
+  const randomIndex = Math.floor(Math.random() * employees.length);
+  const randomEmployee = employees[randomIndex];
+  response.json(randomEmployee);
+});
+
+export default app;
